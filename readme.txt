@@ -1,10 +1,10 @@
-% Microwave-radiometer Noise (MNoise) simulator for noise simulation, characterization and analysis
-%       The simulator can mimic a spaceborne total power radiometer w/ focus on studying the impact of a range of noise
-%       Step1. simulating counts, Step2. calibrating count to antenna temperature (TA) and visualization
+% Microwave-radiometer SIMulator (MSIM) for diagnosing observation error and quantifying uncertainty propagation
+%       The simulator can mimic a spaceborne total power radiometer w/ focus on RFIC noise and a range of error sources
+%       Step1. simulating counts; Step2. converting count to antenna temperature (TA) and visualization
 %
 % Input:
 %       Flexible setup and combination. See Examples and Program Layout for details.
-%       All advanced settings are made in msim_set_*.m under ./src/set/
+%       All settings are made in scripts of "msim_set_*.m" under the directory of "./src/set/"
 %
 % Output:
 %       count, TA, visualization
@@ -23,7 +23,7 @@
 %       Setting.PathRoot = '.\demo\';
 %       Setting.outfile = 'msim_1sim_test.mat';
 %
-%     c) simulation for Metop-A MHS (w/ empirical noise)
+%     c) simulation for NOAA-19 MHS (w/ empirical noise)
 %       Setting.Rad.sensor = 'MHS'; % Simple/MHS/Customize
 %       Setting.Rad.spacecraft = 'Metop-A'; % optional
 %       Setting.PathRoot = '.\demo\';
@@ -38,17 +38,27 @@
 %     Step 2. calibration converting count to TA
 %
 % Program layout:
-%                                         src (source code)                                          data         demo
-%     ________________________________________|______________________________________                 |             |
-%     |            |                  |                |           |                |                 |             |
-%    set         parse               imp             main        noise           utility        a sample orbit  example plot
-%     |            |                  |                |           |                |
-%    setup       parse setup   implement&process    sim/cal     noise related   utility&ancillary
+%                                                      rootpath
+%                                  _______________________|________________________________
+%                                  |                                        |             |
+%                              src (source code)                           data          demo
+%                                  |                                        |             |
+%                                  |                                   sample orbits    examples
+%     _____________________________|__________________________________________________________________________________________            
+%     |            |              |             |           |             |          |            |              |           |    
+%    set         parse           imp           main        noise         orbit      rtm           pol          utility     others   
+%     |            |              |             |           |             |          |             |             |           |
+%    setup     parse setup    implement      sim/cal    generating     orbit&geo  radiative    polarization    ancillary   additional modules    
+%     |                                                   noise                    transfer      related                    (e.g. IGRF)
 %     |
-%   (make all changes here)
+%   (setup and make all changes in scripts in the directory)
 %
 % Computer environment:
-%       MATLAB 2016b version or later, supporting implicit expand for arithmetic operation
+%       MATLAB version 2016b or later, supporting implicit expand for arithmetic operation
 %
+% Version:
+%       V1.0, Feb. 2020
+% 
 % Author:
-%       John Xun Yang, University of Maryland, jxyang@umd.edu, or johnxun@umich.edu, Feb. 2020
+%       Dr. John Xun Yang, University of Maryland, jxyang@umd.edu, or johnxun@umich.edu, Feb. 2020
+%

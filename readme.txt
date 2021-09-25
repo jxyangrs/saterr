@@ -7,7 +7,7 @@
 %       All settings are made in scripts of "msim_set_*.m" under the directory of "./src/set/"
 %
 % Output:
-%       count, TA, visualization
+%       count, TA/TB, visualization
 %
 % Examples:
 %     Step 1. simulation

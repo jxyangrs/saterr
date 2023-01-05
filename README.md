@@ -1,4 +1,4 @@
-SatERR: A Community Error Inventory for Satellite Observation Error Representation and Uncertainty Quantification
+SatERR: A Community Error Inventory for Satellite Microwave Observation Error Representation and Uncertainty Quantification
 
 GitHub
 https://github.com/jxyangrs/saterr
